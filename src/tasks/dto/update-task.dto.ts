@@ -1,10 +1,44 @@
-import { PartialType } from "@nestjs/mapped-types";
-import { CreateTaskDto } from "./create-task.dto";
-import { IsString, IsUUID } from "class-validator";
+import { IsOptional, IsString } from "class-validator";
+import { ApiPropertyOptional } from "@nestjs/swagger";
 
-
-export class UpdateTaskDto extends PartialType(CreateTaskDto) {
-  @IsUUID()
+export class UpdateTaskDto {
+  @ApiPropertyOptional({
+    description: 'Updated task title',
+    example: 'Updated task name',
+  })
+  @IsOptional()
   @IsString()
-  id: string;
+  title?: string;
+
+  @ApiPropertyOptional({
+    description: 'Updated task description',
+    example: 'Updated task description',
+  })
+  @IsOptional()
+  @IsString()
+  description?: string;
+
+  // Explicitly declare other updatable fields (recommended)
+  @ApiPropertyOptional({
+    description: 'Updated due date (ISO string)',
+    example: '2023-12-31T23:59:59.999Z',
+  })
+  @IsOptional()
+  dueDate?: Date;
+
+  @ApiPropertyOptional({
+    description: 'Updated task priority',
+    example: 'high',
+    enum: ['low', 'medium', 'high']
+  })
+  @IsOptional()
+  priority?: string;
+
+  @ApiPropertyOptional({
+    description: 'Updated task status',
+    example: 'in_progress',
+    enum: ['pending', 'in_progress', 'completed']
+  })
+  @IsOptional()
+  status?: string;
 }
