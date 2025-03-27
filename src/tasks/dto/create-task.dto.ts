@@ -5,6 +5,7 @@ export class CreateTaskDto {
   @ApiProperty({
     description: 'The user_id to create task',
     example: '738a0fe6-a5d4-444d-85c0-93ff31f98fb9',
+    required: true,
   })
   @IsNotEmpty()
   @IsUUID()
