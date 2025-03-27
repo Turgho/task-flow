@@ -1,11 +1,15 @@
 import { Module } from '@nestjs/common';
-import { TasksService } from './tasks.service';
-import { TasksController } from './tasks.controller';
+import { TasksController } from './controllers/tasks.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from './entities/task.entity';
-import { CreateTaskUseCase } from './use-case/create-task.use-case';
 import { UsersModule } from 'src/users/users.module';
-import { UpdateTaskUseCase } from './use-case/update-task.use-case';
+
+import { 
+  CreateTaskUseCase, 
+  DeleteTaskUseCase, 
+  FindTaskUseCase, 
+  UpdateTaskUseCase 
+} from './use-case';
 
 @Module({
   imports: [
@@ -16,7 +20,8 @@ import { UpdateTaskUseCase } from './use-case/update-task.use-case';
   providers: [
     CreateTaskUseCase,
     UpdateTaskUseCase,
-    TasksService
+    DeleteTaskUseCase,
+    FindTaskUseCase,
   ],
 })
 export class TasksModule {}
