@@ -10,7 +10,6 @@ export class Task {
     onDelete: 'SET NULL',
     nullable: false,
   })
-  @JoinColumn()
   user: User;
 
   @Column({ length: 100 })
